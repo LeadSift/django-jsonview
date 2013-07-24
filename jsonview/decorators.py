@@ -87,17 +87,17 @@ def json_view(f):
                 'message': unicode(e),
             })
             return http.HttpResponseBadRequest(blob, content_type=JSON)
-        except Exception as e:
-            blob = json.dumps({
-                'error': 500,
-                'message': unicode(e),
-            })
-            logger.exception(unicode(e))
+#         except Exception as e:
+#             blob = json.dumps({
+#                 'error': 500,
+#                 'message': unicode(e),
+#             })
+#             logger.exception(unicode(e))
 
             # Here we lie a little bit. Because we swallow the exception, the
             # BaseHandler doesn't get to send this signal. It sets the sender
             # argument to self.__class__, in case the BaseHandler is
             # subclassed.
-            got_request_exception.send(sender=BaseHandler, request=request)
-            return http.HttpResponseServerError(blob, content_type=JSON)
+#             got_request_exception.send(sender=BaseHandler, request=request)
+#             return http.HttpResponseServerError(blob, content_type=JSON)
     return _wrapped
